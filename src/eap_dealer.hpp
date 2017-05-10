@@ -33,7 +33,7 @@
                 retry_times++;                                                                              \
                 EAP_LOG_ERR("Failed to perform " << step << ", retry times = " << retry_times << std::endl);\
                 EAP_LOG_INFO("Try to perform " << step << " after 2 seconds." << std::endl);                \
-                std::this_thread::sleep_for(std::chrono::seconds(2));                                       \
+                sleep(2)                                                                                    \
             }                                                                                               \
             if (retry_times == MAX_RETRY_TIME)                                                              \
             {                                                                                               \

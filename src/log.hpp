@@ -52,14 +52,14 @@ std::string log_now()
     LOG << "[" << section << " Info] " << info; PRINT_INFO }
 #define LOG_ERR(section, err)                                        \
     LOG << "[" << section << " Error] " << err; PRINT_ERR }
-#ifdef EASYDRCOM_DEBUG
+#ifdef TINYDRCOM_DEBUG
     #define LOG_DBG(section, db)                                     \
         LOG << "[" << section << " Debug] " << db; PRINT_DBG }
 #else
     #define LOG_DBG(db)
 #endif
 
-#ifdef EASYDRCOM_DEBUG
+#ifdef TINYDRCOM_DEBUG
     #define U31_LOG_INFO(info)       LOG_INFO("U31", info)
     #define U31_LOG_ERR(err)         LOG_ERR("U31", err)
     #define U31_LOG_DBG(db)          LOG_DBG("U31", db)

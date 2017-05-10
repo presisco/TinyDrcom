@@ -29,6 +29,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <net/ethernet.h>
+#include <asm/errno.h>
+#include <unistd.h>
 
 #include "easy_drcom_exception.hpp"
 
@@ -443,7 +445,8 @@ int main(int argc, const char * argv[])
             
         SYS_LOG_ERR("Total Alive Count:" << succeed_dial << std::endl);
         SYS_LOG_ERR("Connection broken, try to redial after " << conf.local.retry_interval << " seconds." << std::endl);
-        std::this_thread::sleep_for(std::chrono::seconds(conf.local.retry_interval));
+        //std::this_thread::sleep_for(std::chrono::seconds(conf.local.retry_interval));
+		sleep(conf.local.retry_interval);
     }
     while (conf.general.auto_redial && (broken_count <= conf.local.max_broken_retry));
     

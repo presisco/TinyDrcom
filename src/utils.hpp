@@ -75,9 +75,9 @@ void hexdump(std::vector<uint8_t> hex)
             if (i + j < hex.size())
                 sprintf(buf + strlen(buf), "%c", isprint(hex[i+j]) ? hex[i+j] : '.');
         
-#ifdef EASYDRCOM_DEBUG
+#ifdef TINYDRCOM_DEBUG
         std::clog << buf << std::endl;
-    #ifdef EASYDRCOM_PRINT_DBG_ON_SCREEN
+    #ifdef TINYDRCOM_PRINT_DBG_ON_SCREEN
         std::cout << buf << std::endl;
     #endif
 #endif
