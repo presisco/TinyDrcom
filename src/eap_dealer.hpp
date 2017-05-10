@@ -152,7 +152,7 @@ public:
     
 private:
     pcap_t *handle;
-    std::thread thread_loop;
+    //std::thread thread_loop;
 };
 
 class eap_dealer

@@ -29,7 +29,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <net/ethernet.h>
-#include <asm/errno.h>
+#include <errno.h>
 #include <unistd.h>
 
 #include "easy_drcom_exception.hpp"
@@ -87,7 +87,7 @@ struct easy_drcom_config {
 #include "drcom_dealer.hpp"
 #include "eap_dealer.hpp"
 
-#define MAJOR_VERSION "1.0"
+#define VERSION "1.0"
 
 int read_config(std::string path)
 {
@@ -181,9 +181,6 @@ enum ONLINE_STATE
 };
 ONLINE_STATE state = OFFLINE;
 unsigned long succeed_dial = 0;
-
-std::mutex mtx;
-std::condition_variable cv;
 
 std::vector<uint8_t> broadcast_mac = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 std::vector<uint8_t> nearest_mac = { 0x01, 0x80, 0xc2, 0x00, 0x00, 0x03 };
@@ -415,7 +412,16 @@ int main(int argc, const char * argv[])
     
     // Initialization
     if ((ret = read_config(config_path)) != 0)
-    goto end;
+    {
+        std::cout.rdbuf(cout_def);
+        std::cerr.rdbuf(cerr_def);
+        std::clog.rdbuf(clog_def);
+        
+        log.close();
+        null.close();
+        
+        return ret;
+    }
     
     SYS_LOG_INFO("Initialization done!" << std::endl);
     
@@ -450,7 +456,6 @@ int main(int argc, const char * argv[])
     }
     while (conf.general.auto_redial && (broken_count <= conf.local.max_broken_retry));
     
-end:
     std::cout.rdbuf(cout_def);
     std::cerr.rdbuf(cerr_def);
     std::clog.rdbuf(clog_def);
