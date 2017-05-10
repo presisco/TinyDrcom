@@ -157,7 +157,7 @@ private:
             retry_times++;                                                                              \
             U31_LOG_ERR("Failed to perform " << step << ", retry times = " << retry_times << std::endl);\
             U31_LOG_INFO("Try to perform " << step << " after 2 seconds." << std::endl);                \
-            sleep(2)                                                                                    \
+            sleep(2);                                                                                   \
         }                                                                                               \
         if (retry_times == MAX_RETRY_TIME)                                                              \
         {                                                                                               \
@@ -198,7 +198,7 @@ private:
             retry_times++;                                                                              \
             U62_LOG_ERR("Failed to perform " << step << ", retry times = " << retry_times << std::endl);\
             U62_LOG_INFO("Try to perform " << step << " after 2 seconds." << std::endl);                \
-            sleep(2)                                                                                    \
+            sleep(2);                                                                                   \
         }                                                                                               \
         if (retry_times == MAX_RETRY_TIME)                                                              \
         {                                                                                               \
