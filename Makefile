@@ -32,6 +32,11 @@ define Package/tinydrcom/config
   source "$(SOURCE)/Config.in"
 endef
 
+define Build/Prepare
+  mkdir -p $(PKG_BUILD_DIR)
+  $(CP) ./src/* $(PKG_BUILD_DIR)
+endef
+
 TARGET_CFLAGS += 
 TARGET_CXXFLAGS += -Wno-error=format-security -DOPENWRT $(if $(CONFIG_tinydrcom_DEBUG),-Dtinydrcom_DEBUG, )
 
